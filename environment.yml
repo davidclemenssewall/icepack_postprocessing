@@ -1,0 +1,15 @@
+name: icepack_analysis
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - xarray
+  - netCDF4
+  - cftime
+  - seaborn
+  - jupyter
+  - ipympl
