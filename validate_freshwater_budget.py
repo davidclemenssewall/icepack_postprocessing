@@ -250,7 +250,8 @@ def plot_freshwater_budget(ds, ni, ax):
     ax.set_ylim([df_out.iloc[-1].sum(), df_in.iloc[-1].sum()])
 
 # Load history output
-ip_dirs_path = "/home/dcsewall/code/docker_icepack_interactive/icepack-dirs"
+#ip_dirs_path = "/home/dcsewall/code/docker_icepack_interactive/icepack-dirs"
+ip_dirs_path = "/root/icepack-dirs"
 trcr_dict = {17: 'alvl',
              18: 'vlvl',
              19: 'apnd_t',
@@ -272,6 +273,7 @@ run_dict = {"test_freshwater_budget": None,
             "test_pond_options_fixedhyps_nodynamics": None,
             "test_pond_options_fixedhypsfrbd_nodynamics": None,
             'aicen_hocn_issues_nodynamics': None,
+            "test_freshwater_budget_nodynamics_ktherm1": None,
             }
 
 hist_dict = {}
@@ -336,6 +338,7 @@ keys = ['test_freshwater_budget',
         'test_pond_options_fixedhyps_nodynamics',
         'test_pond_options_fixedhypsfrbd_nodynamics',
         'aicen_hocn_issues_nodynamics',
+        'test_freshwater_budget_nodynamics_ktherm1'
         ]
 
 for key in keys:
@@ -495,6 +498,31 @@ var_names = ['liq_diff',
              'melts', 'meltt']
 xlim = [datetime.datetime.fromisoformat('2015-06-01'),
                   datetime.datetime.fromisoformat('2015-08-15')]
+
+f, axs = plot_handler(run_plot_dict, var_names, hist_dict, xlim=xlim,
+                      cumulative=True)
+
+# Plot residual of pond water ktherm1
+run_plot_dict = {
+                 "test_freshwater_budget_nodynamics_ktherm1": [1,2,3],
+                }
+var_names = ['frshwtr_residual', 'volp', 'apnd', 'hpnd', 'ipnd', 'aice',
+             'mipnd']
+xlim = [datetime.datetime.fromisoformat('2015-06-01'),
+                  datetime.datetime.fromisoformat('2015-11-01')]
+
+f, axs = plot_handler(run_plot_dict, var_names, hist_dict, xlim=xlim)
+
+
+# Plot residual of pond water ktherm1, cumulative
+run_plot_dict = {
+                 "test_freshwater_budget_nodynamics_ktherm1": [1,2,3],
+                }
+var_names = ['liq_diff',
+             'expnd', 'flpnd', 'frpnd', 'rfpnd', 'ilpnd',
+             'melts', 'meltt']
+xlim = [datetime.datetime.fromisoformat('2015-06-01'),
+                  datetime.datetime.fromisoformat('2015-11-01')]
 
 f, axs = plot_handler(run_plot_dict, var_names, hist_dict, xlim=xlim,
                       cumulative=True)
